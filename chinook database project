@@ -1,0 +1,45 @@
+--Show Customers (their full names, customer ID, and country) who are not in the US. (Hint: != or <> can be used to say "is not equal to").
+
+SELECT customerid, firstname, lastname, country
+FROM chinook.customers
+WHERE country<>'US';
+
+--Show only the Customers from Brazil.
+
+SELECT *
+FROM chinook.customers
+WHERE country='Brazil';
+
+--Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, Date of the invoice, and billing country.
+
+SELECT firstname, lastname, invoiceid, invoicedate, billingcountry
+FROM chinook.customers
+LEFT JOIN chinook.invoices
+ON customers.customerid=invoices.CustomerId
+WHERE country='Brazil';
+
+--Show the Employees who are Sales Agents.
+
+SELECT *
+FROM chinook.Employees
+WHERE title='Sales Support Agents';
+
+--Show all media types and their name 
+
+SELECT *
+FROM chinook.media_types;
+
+--Show the artists name and the ablums that belong to them 
+
+SELECT name, albumid, title
+FROM chinook.artists
+INNER JOIN chinook.albums
+ON artists.artistid=albums.ArtistId
+GROUP BY name;
+
+--Show the top then most expensive albums 
+
+SELECT unitprice, albumid, name
+FROM chinook.tracks
+ORDER BY unitprice DESC
+LIMIT 10;
